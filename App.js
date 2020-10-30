@@ -25,7 +25,8 @@ export default class App extends React.Component{
                 /*Get JSON and parse*/
                 const parsed = JSON.parse(jsonResponse.response);
                 console.log("\n\n ------Results-----\n");
-                const whelersArray=[];
+
+                const wehlersArray=[];
 
                 /*Remember to spell Whelers correct from DB product 1 and 13 */
                 for(let [index, product] of Object.entries(parsed)){
@@ -33,19 +34,19 @@ export default class App extends React.Component{
                     if(product.Record.product_brand === "Wehlers" || product.Record.product_brand === "Whelers" ){
 
                         product.Record.metadata = JSON.parse(product.Record.metadata)
-
-                        whelersArray.push(product)
+                        wehlersArray.push(product)
                     }
+
                 }
 
-                this.setState({wehlersProducts:whelersArray})
+                this.setState({wehlersProducts:wehlersArray})
 
                 /*Amount of products */
-                console.log("Efter push til array antal:\n",whelersArray.length);
+                console.log("Efter push til array antal:\n",wehlersArray.length);
 
                 /*Use this one to output wehlers products */
 
-                console.log("Wehlers produkter:\n",whelersArray);
+                console.log("Wehlers produkter:\n",wehlersArray);
 
             }catch (e) {
                 console.log("\n---FejlBesked---\n\n",e)
@@ -63,29 +64,27 @@ export default class App extends React.Component{
     return(
         <View style={styles.container}>
             <FlatList
-            data={wehlersProducts}
-            keyExtractor={item => item.Key}
-            renderItem={({item})=>(
-                <View>
-                    <Text>Key: {item.Key}  </Text>
+                data={wehlersProducts}
+                keyExtractor={item => item.Key}
+                renderItem={({item})=>(
+                    <View>
+                        <Text>Key: {item.Key}  </Text>
 
-                    {/*Meta data loop*/}
-                    <FlatList
-                        data={item.Record.metadata}
-                        keyExtractor={item => item.event_timestamp}
-                        renderItem={({item})=> (
-                            <Text>
-                              Meta Event src: {item.event_src}
-                            </Text>
-                        )}
-                    />
-                    <Text>Produkt id:  {item.Record.product_id}</Text>
-                    <Text>Product time: {item.Record.product_time}</Text>
-                    <Text>Product_brand: {item.Record.product_brand} {"\n"}</Text>
-                </View>
-
-            )}
-            />
+                        {/*Meta data loop*/}
+                        <FlatList
+                            data={item.Record.metadata}
+                            keyExtractor={item => item.event_timestamp}
+                            renderItem={({item})=> (
+                                <Text>
+                                  Meta Event src: {item.event_src}
+                                </Text>
+                            )}
+                        />
+                        <Text>Produkt id:  {item.Record.product_id}</Text>
+                        <Text>Product time: {item.Record.product_time}</Text>
+                        <Text>Product_brand: {item.Record.product_brand} {"\n"}</Text>
+                    </View>
+            )}/>
         </View>
     )
   }
