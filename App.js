@@ -25,7 +25,7 @@ export default class App extends React.Component{
                 /*Get JSON and parse*/
                 const parsed = JSON.parse(jsonResponse.response);
                 console.log("\n\n ------Results-----\n");
-                const wehlersArray=[];
+                const whelersArray=[];
 
                 /*Remember to spell Whelers correct from DB product 1 and 13 */
                 for(let [index, product] of Object.entries(parsed)){
@@ -34,18 +34,18 @@ export default class App extends React.Component{
 
                         product.Record.metadata = JSON.parse(product.Record.metadata)
 
-                        wehlersArray.push(product)
+                        whelersArray.push(product)
                     }
                 }
 
-                this.setState({wehlersProducts:wehlersArray})
+                this.setState({wehlersProducts:whelersArray})
 
                 /*Amount of products */
-                console.log("Efter push til array antal:\n",wehlersArray.length);
+                console.log("Efter push til array antal:\n",whelersArray.length);
 
                 /*Use this one to output wehlers products */
 
-                console.log("Wehlers produkter:\n",wehlersArray);
+                console.log("Wehlers produkter:\n",whelersArray);
 
             }catch (e) {
                 console.log("\n---FejlBesked---\n\n",e)
